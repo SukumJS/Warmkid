@@ -1,21 +1,18 @@
 import { NextResponse } from "next/server";
-import { ConnectDB } from "../../../../config/config";
 import { ClickModel } from "../../../../models/models";
+import { ConnectDB } from "../../../../config/config";
 
-export async function GET(req: Request) {
+export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const { name } = body;
+    const { userID } = await req.json();
     ConnectDB();
-    const response = await ClickModel.countDocuments({
-      name,
+    const user = await ClickModel.create({
+      user_id: Object(userID),
+      date: new Date(),
     });
-    return NextResponse.json({
-      name: name,
-      count: response,
-    });
+    await user.save();
+    return NextResponse.json({ message: "Click" });
   } catch (err) {
-    console.error(err);
-    return NextResponse.error();
+    return NextResponse.json({ error: err }, { status: 500 });
   }
 }
