@@ -3,7 +3,6 @@ import { cookies } from "next/headers";
 
 export const addUser = async (formData: FormData) => {
   const cookieStore = await cookies();
-
   const response = await fetch("http://localhost:3000/api/user", {
     method: "POST",
     body: JSON.stringify({ name: formData.get("name") }),
