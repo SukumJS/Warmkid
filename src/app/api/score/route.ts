@@ -4,10 +4,10 @@ import { ConnectDB } from "../../../../config/config";
 
 export async function POST(req: Request) {
   try {
-    const { userID } = await req.json();
-    ConnectDB();
+    const { user_ID } = await req.json();
+    await ConnectDB();
     const user = await ClickModel.create({
-      user_id: Object(userID),
+      user_id: Object(user_ID),
       date: new Date(),
     });
     await user.save();
