@@ -1,16 +1,16 @@
-import {Schema,model} from "mongoose";
+import mongoose, {Schema} from "mongoose";
 
 
 
 const userSchema = new Schema({
     name : {
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     ClickArry : [
         {
-            type:Number,
-            required:true
+            type:Schema.Types.ObjectId,
         }
     ],
     Game : {
@@ -19,7 +19,7 @@ const userSchema = new Schema({
 });
 
 
-export const User = model("User",userSchema);
+export const User = mongoose.models.User || mongoose.model("User",userSchema);
 
 
 const Click = new Schema({
@@ -34,4 +34,4 @@ const Click = new Schema({
     },
 });
 
-export const ClickModel = model("Click",Click);
+export const ClickModel = mongoose.models.Click || mongoose.model("Click",Click);
