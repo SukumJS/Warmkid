@@ -24,9 +24,9 @@ export const addUser = async (formData: FormData) => {
 export const handlePopClick = async () => {
   const cookieStore = await cookies();
   const userID = cookieStore.get("user_id");
-  await fetch("http://localhost:3000/api/score", {
+  await fetch("http://localhost:3000/api/score/", {
     method: "POST",
-    body: JSON.stringify({ userID: userID?.value }),
+    body: JSON.stringify({ user_ID: userID?.value }),
     headers: {
       "Content-Type": "application/json",
     },
