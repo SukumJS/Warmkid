@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { ConnectDB } from "../../../../../config/config";
-import { ClickModel } from "../../../../../models/models";
+import {User } from "../../../../../models/models";
 
 export async function GET(
   req: Request,
@@ -8,14 +8,18 @@ export async function GET(
 ) {
   try {
     const { user_id } = await params;
-    console.log(user_id);
     await ConnectDB();
-    const response = await ClickModel.countDocuments({
-      user_id: Object(user_id),
-    });
-    return NextResponse.json({
-      user_id: user_id,
-      count: response,
+    const user = await User.findById(user_id);
+
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    return NextResponse.json({ 
+      user: {
+        user_id : user._id,
+        counter: user.ClickArry.length
+      }
     });
   } catch (err) {
     console.error(err);

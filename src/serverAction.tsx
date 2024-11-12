@@ -3,7 +3,6 @@ import { cookies } from "next/headers";
 
 export const addUser = async (formData: FormData) => {
   const cookieStore = await cookies();
-
   const response = await fetch("http://localhost:3000/api/user", {
     method: "POST",
     body: JSON.stringify({ name: formData.get("name") }),
@@ -26,7 +25,7 @@ export const handlePopClick = async () => {
   const userID = cookieStore.get("user_id");
   await fetch("http://localhost:3000/api/score/", {
     method: "POST",
-    body: JSON.stringify({ user_ID: userID?.value }),
+    body: JSON.stringify({ userID: userID?.value }),
     headers: {
       "Content-Type": "application/json",
     },
