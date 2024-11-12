@@ -25,7 +25,7 @@ export const handlePopClick = async () => {
   const userID = cookieStore.get("user_id");
   await fetch("http://localhost:3000/api/score/", {
     method: "POST",
-    body: JSON.stringify({ user_ID: userID?.value }),
+    body: JSON.stringify({ userID: userID?.value }),
     headers: {
       "Content-Type": "application/json",
     },

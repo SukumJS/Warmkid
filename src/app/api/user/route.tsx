@@ -22,7 +22,7 @@ export async function POST(req: Request) {
 export async function GET() {
   try {
     await ConnectDB();
-    const users = await User.find();
+    const users = await User.find({});
     return NextResponse.json(users);
   } catch (error) {
     console.log(error);
