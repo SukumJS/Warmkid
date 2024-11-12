@@ -31,3 +31,24 @@ export const handlePopClick = async () => {
     },
   });
 };
+
+export const getScore = async () => {
+  const cookieStore = await cookies();
+  const userID = cookieStore.get("user_id")?.value;
+  
+  const response = await fetch(`http://localhost:3000/api/score/${userID}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    console.error("Failed to fetch score");
+    return 0; // or handle error appropriately
+  }
+
+  const data = await response.json();
+  return data.user.counter; // Assuming the response has a score property
+};
+
