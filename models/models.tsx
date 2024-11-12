@@ -14,7 +14,7 @@ const userSchema = new Schema({
         }
     ],
     Game : {
-        type: [Boolean],
+        type: [Number],
     }
 });
 
