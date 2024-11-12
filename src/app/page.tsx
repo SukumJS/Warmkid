@@ -1,6 +1,5 @@
-import { addUser } from "@/serverAction";
-
-
+"use client";
+import { addUser, handlePopClick } from "@/serverAction";
 
 export default function Home() {
   return (
@@ -11,6 +10,13 @@ export default function Home() {
         <input type="name" name="name" />
         <button>submit</button>
       </form>
+      <button
+        onClick={() => {
+          handlePopClick();
+        }}
+      >
+        Pop
+      </button>
     </>
   );
 }
