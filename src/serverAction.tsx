@@ -1,5 +1,4 @@
 "use server";
-import { METHODS } from "http";
 import { cookies } from "next/headers";
 
 export const addUser = async (formData: FormData) => {
@@ -31,6 +30,31 @@ export const handlePopClick = async () => {
       "Content-Type": "application/json",
     },
   });
+};
+
+export const handleAnswerSubmit = async (resultArray: boolean[]) => {
+  try {
+    const cookieStore = await cookies();
+    console.log("letgo : " + resultArray);
+
+    const userID = cookieStore.get("user_id")?.value;
+    await fetch(`http://localhost:3000/api/quizz/${userID}`, {
+      method: "POST",
+      body: JSON.stringify({ answer: resultArray }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const getScore = async () => {
@@ -85,11 +109,11 @@ export const getTotalScore = async () => {
   }
 
   const data = await response.json();
-  return data.total; 
+  return data.total;
 };
 
 export const getLeaderboard = async () => {
-    const response = await fetch("http://localhost:3000/api/leaderboard/", {
+  const response = await fetch("http://localhost:3000/api/leaderboard/", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

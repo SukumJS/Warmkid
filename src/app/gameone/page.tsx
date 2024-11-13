@@ -6,6 +6,32 @@ import Image from "next/image";
 import Logo from "./../../../public/gameone8.svg";
 import PropQuizz from "../../../components/PropQuizz";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
+interface QuizzContextType {
+  currentQuizz: number[];
+  quizzs: IQuizz[];
+  paginate: void;
+  currentPage: number;
+  setAnswer: React.Dispatch<React.SetStateAction<boolean[]>>;
+  totalQuizz: number;
+  quizzperPage: number;
+  answer: boolean[];
+}
+
+
+interface Ichoice {
+  id: number;
+  url: string;
+  isCorrect: boolean;
+}
+
+interface IQuizz {
+  id: number;
+  question: string;
+  choices: Ichoice[];
+}
+
 export const QuizzContext = createContext<any>({});
 
 const GameOne = () => {
@@ -27,12 +53,8 @@ const GameOne = () => {
     totalQuizz: quizzs.length,
     quizzperPage,
     answer,
-  
   };
 
-
-  console.log(answer);
-  
 
   return (
     <>
