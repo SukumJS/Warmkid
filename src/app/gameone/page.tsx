@@ -1,36 +1,10 @@
 "use client";
 
-import React, { useState, createContext } from "react";
-import data from "@/../data.json";
+import React, { useState } from "react";
+import data from "../../../data.json";
 import Image from "next/image";
 import Logo from "./../../../public/gameone8.svg";
 import PropQuizz from "../../../components/PropQuizz";
-
-interface QuizzContextType {
-  currentQuizz: number[];
-  quizzs: IQuizz[];
-  paginate: void;
-  currentPage: number;
-  setAnswer: React.Dispatch<React.SetStateAction<boolean[]>>;
-  totalQuizz: number;
-  quizzperPage: number;
-  answer: boolean[];
-}
-
-interface Ichoice {
-  id: number;
-  url: string;
-  isCorrect: boolean;
-}
-
-interface IQuizz {
-  id: number;
-  question: string;
-  choices: Ichoice[];
-}
-export const QuizzContext = createContext<QuizzContextType | undefined>(
-  undefined
-);
 
 const GameOne = () => {
   const { quizzs } = data;
@@ -42,16 +16,7 @@ const GameOne = () => {
   const currentQuizz = quizzs.slice(indexOfFirstQuizz, indexOfLastQuizz);
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-  const QuizzContextValue = {
-    currentQuizz,
-    quizzs,
-    paginate,
-    currentPage,
-    setAnswer,
-    totalQuizz: quizzs.length,
-    quizzperPage,
-    answer,
-  };
+
 
   return (
     <>
@@ -62,9 +27,7 @@ const GameOne = () => {
             <h1>WHICH IS A</h1>
             <h1>&quot; AI GENERATED IMAGE&quot;</h1>
           </div>
-          <QuizzContext.Provider value={QuizzContextValue}>
-            <PropQuizz />
-          </QuizzContext.Provider>
+          <PropQuizz currentQuizz={currentQuizz} quizzs={quizzs} paginate={paginate} currentPage={currentPage} setAnswer={setAnswer} totalQuizz={quizzs.length} quizzperPage={quizzperPage} answer={answer}  />
         </div>
       </div>
     </>

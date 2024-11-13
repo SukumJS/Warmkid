@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from "react";
-import { QuizzContext } from "../src/app/gameone/page";
+import React, {useEffect } from "react";
 import Image from "next/image";
 import { handleAnswerSubmit } from "@/serverAction";
+import data from "../data.json";
 
 interface Ichoice {
   id: number;
@@ -9,13 +9,19 @@ interface Ichoice {
   isCorrect: boolean;
 }
 
-interface IQuizz {
-  id: number;
-  question: string;
-  choices: Ichoice[];
+
+interface QuizzContextType {
+  currentQuizz: typeof data.quizzs;
+  quizzs: typeof data.quizzs;
+  paginate: (pageNumber: number) => void;
+  currentPage: number;
+  setAnswer: React.Dispatch<React.SetStateAction<boolean[]>>;
+  totalQuizz: number;
+  quizzperPage: number;
+  answer: boolean[];
 }
 
-const PropQuizz = () => {
+const PropQuizz = (props: QuizzContextType) => {
   const {
     currentQuizz,
     setAnswer,
@@ -24,9 +30,9 @@ const PropQuizz = () => {
     paginate,
     currentPage,
     answer,
-  } = useContext(QuizzContext);
+  } = props;
 
-  const quizz: IQuizz[] = currentQuizz;
+  const quizz = currentQuizz;
 
   const pageNumbers: number[] = [];
 
@@ -55,7 +61,7 @@ const PropQuizz = () => {
 
   return (
     <div className="h-full w-full flex justify-center flex-col">
-      {quizz.map((quizz: IQuizz, index: number) => {
+      {quizz.map((quizz, index: number) => {
         return (
           <div key={index}>
             <h1>{quizz.question}</h1>

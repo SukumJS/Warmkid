@@ -1,9 +1,10 @@
 "use server";
 import { cookies } from "next/headers";
+import { baseURL } from "../config/config";
 
 export const addUser = async (formData: FormData) => {
   const cookieStore = await cookies();
-  const response = await fetch("http://localhost:3000/api/user", {
+  const response = await fetch(baseURL+"/api/user", {
     method: "POST",
     body: JSON.stringify({ name: formData.get("name") }),
     headers: {
@@ -23,7 +24,7 @@ export const addUser = async (formData: FormData) => {
 export const handlePopClick = async () => {
   const cookieStore = await cookies();
   const userID = cookieStore.get("user_id");
-  await fetch("http://localhost:3000/api/score/", {
+  await fetch(baseURL+"/api/score/", {
     method: "POST",
     body: JSON.stringify({ userID: userID?.value }),
     headers: {
@@ -38,9 +39,9 @@ export const handleAnswerSubmit = async (resultArray: boolean[]) => {
     console.log("letgo : " + resultArray);
 
     const userID = cookieStore.get("user_id")?.value;
-    await fetch(`http://localhost:3000/api/quizz/${userID}`, {
+    await fetch(baseURL+`/api/quizz`, {
       method: "POST",
-      body: JSON.stringify({ answer: resultArray }),
+      body: JSON.stringify({ id : userID , answer: resultArray }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -67,7 +68,7 @@ export const getScore = async () => {
     return 0;
   }
 
-  const response = await fetch(`http://localhost:3000/api/score/${userID}`, {
+  const response = await fetch(baseURL+`/api/score/${userID}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -96,7 +97,7 @@ export const getScore = async () => {
 };
 
 export const getTotalScore = async () => {
-  const response = await fetch("http://localhost:3000/api/score/", {
+  const response = await fetch(baseURL+"/api/score/", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -113,7 +114,7 @@ export const getTotalScore = async () => {
 };
 
 export const getLeaderboard = async () => {
-  const response = await fetch("http://localhost:3000/api/leaderboard/", {
+  const response = await fetch(baseURL+"/api/leaderboard/", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
