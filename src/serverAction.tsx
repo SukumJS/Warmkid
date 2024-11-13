@@ -33,7 +33,13 @@ export const handlePopClick = async () => {
     headers: {
       "Content-Type": "application/json",
     },
-  });
+  })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 export const handleAnswerSubmit = async (resultArray: boolean[]) => {
