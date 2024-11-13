@@ -1,15 +1,14 @@
 import { NextResponse } from "next/server";
-import { ConnectDB } from "../../../../../config/config";
+import { ConnectDB } from "../../../../config/config";
 import { User } from "../../../../../models/models";
 
-// Ensure the params are awaited properly
-export async function GET(
-  req: Request,
-  { params }: { params: { user_id: string } }
-) {
+type RouteContext = {
+  params: Promise<{ user_id: string }>;
+};
+
+export async function GET(req: Request, context: RouteContext) {
   try {
-    // Await params before using them
-    const { user_id } = await params;
+    const { user_id } = await context.params;
 
     await ConnectDB();
     const user = await User.findById(user_id);
@@ -26,6 +25,9 @@ export async function GET(
     });
   } catch (err) {
     console.error(err);
-    return NextResponse.json({ error: "Failed to fetch user score" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to fetch user score" },
+      { status: 500 }
+    );
   }
 }
