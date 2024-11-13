@@ -1,10 +1,20 @@
 "use client";
 
-import React, { useState, createContext } from "react";
+import React, { useState, useEffect , createContext } from "react";
 import data from "@/../data.json";
 import Image from "next/image";
 import Logo from "./../../../public/gameone8.svg";
 import PropQuizz from "../../../components/PropQuizz";
+import { checkCoookie } from '@/serverAction';
+import { redirect } from 'next/navigation'
+
+useEffect(() => {
+  async function getCookie() {
+      const isCookie = await checkCoookie();
+      if(!isCookie)redirect('/')
+  }
+  getCookie();
+}, []);
 
 interface QuizzContextType {
   currentQuizz: number[];
@@ -55,14 +65,14 @@ const GameOne = () => {
 
   return (
     <>
-      <div className="flex justify-center my-auto py-10">
+      <div className="bg w-auto h-auto py-10 px-5">
         <div className="text-center font-bold">
-          <Image src={Logo} alt="Logo" />
-          <div className="my-auto py-5 text-xl">
+          <Image src={Logo} alt="Logo" width={300} height={300} className="flex justify-self-center"/>
+          <div className="my-auto py-5 text-2xl text-white">
             <h1>WHICH IS A</h1>
             <h1>&quot; AI GENERATED IMAGE&quot;</h1>
           </div>
-          <QuizzContext.Provider value={QuizzContextValue}>
+          <QuizzContext.Provider value={QuizzContextValue} >
             <PropQuizz />
           </QuizzContext.Provider>
         </div>

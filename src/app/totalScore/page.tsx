@@ -21,7 +21,7 @@ export default function App() {
     <>
       <div className="bg w-screen h-screen content-center">
         <div>
-          <div className="font-bold text-4xl flex justify-self-center">
+          <div className="font-bold text-5xl flex justify-self-center text-white mb-4">
             Total Score : {count}
           </div>
           <Image
