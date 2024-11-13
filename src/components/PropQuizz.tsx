@@ -73,7 +73,7 @@ const PropQuizz = (props: QuizzContextType) => {
         return (
           <div key={index}>
             <h1 className="mb-4 text-4xl">{quizz.question}</h1>
-            <div>
+          <div>
               {quizz.choices.map((choice: Ichoice, index: number) => {
                 return (
                   <div className="flex flex-row mb-4" key={index}>

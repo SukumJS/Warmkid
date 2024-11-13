@@ -17,7 +17,7 @@ const GameOne = () => {
   const indexOfFirstQuizz = indexOfLastQuizz - quizzperPage;
   const currentQuizz = quizzs.slice(indexOfFirstQuizz, indexOfLastQuizz);
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-  
+
   useEffect(() => {
     async function getCookie() {
         const isCookie = await checkCoookie();
@@ -26,30 +26,34 @@ const GameOne = () => {
     getCookie();
   }, []);
 
-
   return (
     <>
-      <div className="bg w-auto h-auto py-10 px-5">
+      <div className="bg w-screen min-h-screen h-auto py-10 px-5">
       <div className="text-center font-bold text-white">
-      <Image src="/img/gameone8.svg" alt="Logo" width={300} height={300} className="flex justify-self-center"/>
-          <div className="my-auto py-5 text-2xl">
-            <h1>WHICH IS A</h1>
-            <h1>&quot; AI GENERATED IMAGE&quot;</h1>
-          </div>
+      <Image src="/img/gameone8.svg" alt="Logo" width={300} height={300} className="flex justify-self-center mb-4"/>
           {score != -1 ? (
-            <h1>{score}</h1>
+            <div>
+              <h1 className="font-bold text-3xl text-white">You recived : {score} points!</h1>
+              <Image src="/img/modwelcome.png" alt="" width={500} height={500}></Image>
+            </div>
           ) : (
-            <PropQuizz
-              currentQuizz={currentQuizz}
-              quizzs={quizzs}
-              paginate={paginate}
-              currentPage={currentPage}
-              setAnswer={setAnswer}
-              totalQuizz={quizzs.length}
-              quizzperPage={quizzperPage}
-              answer={answer}
-              setScore={setScore}
-            />
+            <div>
+              <div className="my-auto py-5 text-2xl">
+                <h1>WHICH IS A</h1>
+                <h1>&quot; AI GENERATED IMAGE&quot;</h1>
+              </div>
+              <PropQuizz
+                currentQuizz={currentQuizz}
+                quizzs={quizzs}
+                paginate={paginate}
+                currentPage={currentPage}
+                setAnswer={setAnswer}
+                totalQuizz={quizzs.length}
+                quizzperPage={quizzperPage}
+                answer={answer}
+                setScore={setScore}
+              />
+            </div>
           )}
         </div>
       </div>
