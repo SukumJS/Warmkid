@@ -7,7 +7,7 @@ export const checkCoookie = async () => {
   const cookieStore = await cookies();
   const userID = cookieStore.get("user_id");
 
-  if(userID)return true;
+  if (userID) return true;
   else return false;
 };
 
@@ -52,19 +52,21 @@ export const handleAnswerSubmit = async (resultArray: boolean[]) => {
     console.log("letgo : " + resultArray);
 
     const userID = cookieStore.get("user_id")?.value;
-    await fetch(`https://warmkid-nextjs.ialwh0.easypanel.host/api/quizz`, {
+    const response = await fetch(`http://localhost:3000/api/quizz`, {
       method: "POST",
       body: JSON.stringify({ id: userID, answer: resultArray }),
       headers: {
-        "Content-Type": "application/json",
+      "Content-Type": "application/json",
       },
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    });
+
+    if (!response.ok) {
+      console.error("Failed to submit answers");
+      return null;
+    }
+
+    const data = await response.json();
+    return data;
   } catch (error) {
     console.log(error);
   }
