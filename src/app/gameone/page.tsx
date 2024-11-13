@@ -31,7 +31,7 @@ interface IQuizz {
   question: string;
   choices: Ichoice[];
 }
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const QuizzContext = createContext<any>({});
 
 const GameOne = () => {
