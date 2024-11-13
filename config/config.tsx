@@ -8,3 +8,5 @@ export const ConnectDB = async () => {
         console.log(error);
     }
 };
+
+export const baseURL = String(process.env.BASE_URL);
