@@ -1,4 +1,4 @@
-import React, { useContext} from "react";
+import React, { useContext, useEffect } from "react";
 import { QuizzContext } from "../src/app/gameone/page";
 import Image from "next/image";
 import { handleAnswerSubmit } from "@/serverAction";
@@ -35,15 +35,18 @@ const PropQuizz = () => {
   }
 
   const handleNextQuizz = () => {
-    pageNumbers.map(async(number) => {
-      if (currentPage === totalQuizz) {
-        await handleAnswerSubmit(answer);
-      }
+    pageNumbers.map(async (number) => {
       if (currentPage === number) {
         paginate(number + 1);
       }
     });
   };
+  useEffect(() => {
+    console.log("answer", answer);
+    if (answer.length === totalQuizz) {
+      handleAnswerSubmit(answer);
+    }
+  }, [answer]);
 
   const handleAnswer = async (isCorrect: boolean) => {
     await setAnswer((prev: boolean[]) => [...prev, isCorrect]);
@@ -52,24 +55,30 @@ const PropQuizz = () => {
 
   return (
     <div className="h-full w-full flex justify-center flex-col">
-        {
-          quizz.map((quizz:IQuizz , index : number) => {
-            return (
-              <div key={index}>
-                <h1>{quizz.question}</h1>
-                <div className="flex justify-center">
-                  {quizz.choices.map((choice: Ichoice,index : number) => {
-                    return (
-                      <div key={index} onClick={() => handleAnswer(choice.isCorrect)}>
-                        <Image src={choice.url} alt="Logo" width={100} height={100} />
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })
-        }
+      {quizz.map((quizz: IQuizz, index: number) => {
+        return (
+          <div key={index}>
+            <h1>{quizz.question}</h1>
+            <div className="flex justify-center">
+              {quizz.choices.map((choice: Ichoice, index: number) => {
+                return (
+                  <div
+                    key={index}
+                    onClick={() => handleAnswer(choice.isCorrect)}
+                  >
+                    <Image
+                      src={choice.url}
+                      alt="Logo"
+                      width={100}
+                      height={100}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
