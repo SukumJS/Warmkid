@@ -1,4 +1,4 @@
-import React, {useEffect } from "react";
+import React, { useEffect} from "react";
 import Image from "next/image";
 import { handleAnswerSubmit } from "@/serverAction";
 import data from "../data.json";
@@ -9,7 +9,6 @@ interface Ichoice {
   isCorrect: boolean;
 }
 
-
 interface QuizzContextType {
   currentQuizz: typeof data.quizzs;
   quizzs: typeof data.quizzs;
@@ -19,6 +18,7 @@ interface QuizzContextType {
   totalQuizz: number;
   quizzperPage: number;
   answer: boolean[];
+  setScore: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const PropQuizz = (props: QuizzContextType) => {
@@ -30,6 +30,7 @@ const PropQuizz = (props: QuizzContextType) => {
     paginate,
     currentPage,
     answer,
+    setScore,
   } = props;
 
   const quizz = currentQuizz;
@@ -50,7 +51,13 @@ const PropQuizz = (props: QuizzContextType) => {
   useEffect(() => {
     console.log("answer", answer);
     if (answer.length === totalQuizz) {
-      handleAnswerSubmit(answer);
+      handleAnswerSubmit(answer)
+        .then((data) => {
+          setScore(data.score);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   }, [answer]);
 
@@ -58,6 +65,7 @@ const PropQuizz = (props: QuizzContextType) => {
     await setAnswer((prev: boolean[]) => [...prev, isCorrect]);
     handleNextQuizz();
   };
+
 
   return (
     <div className="h-full w-full flex justify-center flex-col">
@@ -68,11 +76,8 @@ const PropQuizz = (props: QuizzContextType) => {
             <div>
               {quizz.choices.map((choice: Ichoice, index: number) => {
                 return (
-                  <div className="flex flex-row mb-4">
-                    <div
-                      key={index}
-                      onClick={() => handleAnswer(choice.isCorrect)}
-                    >
+                  <div className="flex flex-row mb-4" key={index}>
+                    <div onClick={() => handleAnswer(choice.isCorrect)}>
                       <Image
                         src={choice.url}
                         alt="Logo"

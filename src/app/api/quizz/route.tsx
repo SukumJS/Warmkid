@@ -24,7 +24,9 @@ export async function POST(req: Request) {
     }
     user.Game = newAnswer;
     await user.save();
-    return NextResponse.json(user);
+    return NextResponse.json({
+      score: user.Game.reduce((a: number, b: number) => a + b, 0),
+    });
   } catch (error) {
     console.log(error);
     return NextResponse.json({ error: "An error occurred" }, { status: 500 });
