@@ -17,6 +17,7 @@ const GameOne = () => {
   const indexOfFirstQuizz = indexOfLastQuizz - quizzperPage;
   const currentQuizz = quizzs.slice(indexOfFirstQuizz, indexOfLastQuizz);
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  
   useEffect(() => {
     async function getCookie() {
         const isCookie = await checkCoookie();
