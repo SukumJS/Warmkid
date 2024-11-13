@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import data from "../../../data.json";
+import data from "@/data.json";
 import Image from "next/image";
 import Logo from "./../../../public/gameone8.svg";
-import PropQuizz from "../../../components/PropQuizz";
+import PropQuizz from "@/components/PropQuizz";
 
 const GameOne = () => {
   const { quizzs } = data;
