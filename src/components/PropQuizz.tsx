@@ -64,20 +64,22 @@ const PropQuizz = (props: QuizzContextType) => {
       {quizz.map((quizz, index: number) => {
         return (
           <div key={index}>
-            <h1>{quizz.question}</h1>
-            <div className="flex justify-center">
+            <h1 className="mb-4 text-4xl">{quizz.question}</h1>
+            <div>
               {quizz.choices.map((choice: Ichoice, index: number) => {
                 return (
-                  <div
-                    key={index}
-                    onClick={() => handleAnswer(choice.isCorrect)}
-                  >
-                    <Image
-                      src={choice.url}
-                      alt="Logo"
-                      width={100}
-                      height={100}
-                    />
+                  <div className="flex flex-row mb-4">
+                    <div
+                      key={index}
+                      onClick={() => handleAnswer(choice.isCorrect)}
+                    >
+                      <Image
+                        src={choice.url}
+                        alt="Logo"
+                        width={150}
+                        height={100}
+                      />
+                    </div>
                   </div>
                 );
               })}

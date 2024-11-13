@@ -2,6 +2,14 @@
 import { cookies } from "next/headers";
 // import { baseURL } from "@/config/config";
 
+export const checkCoookie = async () => {
+  const cookieStore = await cookies();
+  const userID = cookieStore.get("user_id");
+
+  if(userID)return true;
+  else return false;
+};
+
 export const addUser = async (formData: FormData) => {
   const cookieStore = await cookies();
   const response = await fetch(
