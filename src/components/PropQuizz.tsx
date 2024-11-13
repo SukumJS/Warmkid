@@ -60,7 +60,7 @@ const PropQuizz = (props: QuizzContextType) => {
   };
 
   return (
-    <div className="h-full w-full flex justify-center flex-col">
+    <div className="h-full w-full flex justify-center">
       {quizz.map((quizz, index: number) => {
         return (
           <div key={index}>

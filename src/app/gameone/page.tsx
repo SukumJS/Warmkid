@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import data from "@/data.json";
 import Image from "next/image";
-import Logo from "./../../../public/gameone8.svg";
 import PropQuizz from "@/components/PropQuizz";
+import { checkCoookie } from '@/serverAction';
+import { redirect } from 'next/navigation'
 
 const GameOne = () => {
   const { quizzs } = data;
@@ -16,14 +17,20 @@ const GameOne = () => {
   const currentQuizz = quizzs.slice(indexOfFirstQuizz, indexOfLastQuizz);
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-
+  useEffect(() => {
+    async function getCookie() {
+        const isCookie = await checkCoookie();
+        if(!isCookie)redirect('/')
+    }
+    getCookie();
+  }, []);
 
   return (
     <>
       <div className="bg w-auto h-auto py-10 px-5">
-        <div className="text-center font-bold">
-          <Image src={Logo} alt="Logo" width={300} height={300} className="flex justify-self-center"/>
-          <div className="my-auto py-5 text-2xl text-white">
+        <div className="text-center font-bold text-white">
+          <Image src="/img/gameone8.svg" alt="Logo" width={300} height={300} className="flex justify-self-center"/>
+          <div className="my-auto py-5 text-2xl ">
             <h1>WHICH IS A</h1>
             <h1>&quot; AI GENERATED IMAGE&quot;</h1>
           </div>
