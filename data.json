@@ -1,0 +1,54 @@
+{
+  "quizzs": [
+    {
+      "question": 1,
+      "choices": [
+        {
+          "id": 1,
+          "url": "https://images.unsplash.com/photo-1721332149069-a470150ef51c?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "isCorrect": false
+        },
+        {
+          "id": 2,
+          "url": "https://images.unsplash.com/photo-1721332149069-a470150ef51c?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "isCorrect": true
+        },
+        {
+          "id": 3,
+          "url": "https://images.unsplash.com/photo-1721332149069-a470150ef51c?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "isCorrect": false
+        },
+        {
+          "id": 4,
+          "url": "https://plus.unsplash.com/premium_photo-1730828574186-8b5c216a057f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "isCorrect": false
+        }
+      ]
+    },
+    {
+      "question": 2,
+      "choices": [
+        {
+          "id": 1,
+          "url": "https://images.unsplash.com/photo-1721332149069-a470150ef51c?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "isCorrect": false
+        },
+        {
+          "id": 2,
+          "url": "https://plus.unsplash.com/premium_photo-1730828574186-8b5c216a057f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "isCorrect": true
+        },
+        {
+          "id": 3,
+          "url": "https://images.unsplash.com/photo-1721332149069-a470150ef51c?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "isCorrect": false
+        },
+        {
+          "id": 4,
+          "url": "https://images.unsplash.com/photo-1721332149069-a470150ef51c?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "isCorrect": false
+        }
+      ]
+    }
+  ]
+}
