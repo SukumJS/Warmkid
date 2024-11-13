@@ -1,6 +1,6 @@
 "use server";
 import { cookies } from "next/headers";
-import { baseURL } from "../config/config";
+import { baseURL } from "@/config/config";
 
 export const addUser = async (formData: FormData) => {
   const cookieStore = await cookies();

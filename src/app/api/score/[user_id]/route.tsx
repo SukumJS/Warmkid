@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { ConnectDB } from "../../../../../config/config";
+import { ConnectDB } from "../../../../config/config";
 import { User } from "../../../../../models/models";
 
 type RouteContext = {
