@@ -1,6 +1,5 @@
 "use server";
 import { cookies } from "next/headers";
-import { redirect } from 'next/navigation';
 // import { baseURL } from "@/config/config";
 
 export const checkCoookie = async () => {
@@ -30,7 +29,6 @@ export const addUser = async (formData: FormData) => {
     httpOnly: true,
     path: "/",
   });
-  redirect('/');
   console.log(data);
 };
 
