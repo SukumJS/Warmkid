@@ -1,18 +1,10 @@
 "use client";
 
-import React, { useState, createContext } from "react";
-import data from "@/../data.json";
+import React, { useState } from "react";
+import data from "../../../data.json";
 import Image from "next/image";
 import Logo from "./../../../public/gameone8.svg";
 import PropQuizz from "../../../components/PropQuizz";
-
-
-
-
-
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const QuizzContext = createContext<any>({});
 
 const GameOne = () => {
   const { quizzs } = data;
@@ -24,16 +16,7 @@ const GameOne = () => {
   const currentQuizz = quizzs.slice(indexOfFirstQuizz, indexOfLastQuizz);
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-  const QuizzContextValue = {
-    currentQuizz,
-    quizzs,
-    paginate,
-    currentPage,
-    setAnswer,
-    totalQuizz: quizzs.length,
-    quizzperPage,
-    answer,
-  };
+
 
   return (
     <>
@@ -44,9 +27,7 @@ const GameOne = () => {
             <h1>WHICH IS A</h1>
             <h1>&quot; AI GENERATED IMAGE&quot;</h1>
           </div>
-          <QuizzContext.Provider value={QuizzContextValue}>
-            <PropQuizz />
-          </QuizzContext.Provider>
+          <PropQuizz currentQuizz={currentQuizz} quizzs={quizzs} paginate={paginate} currentPage={currentPage} setAnswer={setAnswer} totalQuizz={quizzs.length} quizzperPage={quizzperPage} answer={answer}  />
         </div>
       </div>
     </>
