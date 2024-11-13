@@ -27,11 +27,17 @@ export const addUser = async (formData: FormData) => {
 export const handlePopClick = async () => {
   const cookieStore = await cookies();
   const userID = cookieStore.get("user_id")?.value;
+  if (!userID) {
+    console.error("User ID not found in cookies.");
+    return;
+  }
+
   await fetch("https://warmkid-nextjs.ialwh0.easypanel.host/api/score/", {
     method: "POST",
     body: JSON.stringify({ userID: userID }),
     headers: {
       "Content-Type": "application/json",
+      "Content-Length": Buffer.byteLength(userID, "utf-8").toString(),
     },
   })
     .then((response) => {
