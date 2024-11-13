@@ -31,3 +31,95 @@ export const handlePopClick = async () => {
     },
   });
 };
+
+export const handleAnswerSubmit = async (resultArray: boolean[]) => {
+  try {
+    const cookieStore = await cookies();
+    console.log("letgo : " + resultArray);
+
+    const userID = cookieStore.get("user_id")?.value;
+    await fetch(`http://localhost:3000/api/quizz/${userID}`, {
+      method: "POST",
+      body: JSON.stringify({ answer: resultArray }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getScore = async () => {
+  const cookieStore = await cookies();
+  const userID = cookieStore.get("user_id")?.value;
+
+  // Check if userID is available in the cookies
+  if (!userID) {
+    console.error("User ID not found in cookies.");
+    return 0;
+  }
+
+  const response = await fetch(`http://localhost:3000/api/score/${userID}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    console.error("Failed to fetch score");
+    return 0; // Return 0 if fetching the score fails
+  }
+
+  try {
+    const data = await response.json();
+
+    // Check if the response has the user object with the counter
+    if (data?.user?.counter !== undefined) {
+      return data.user.counter; // Return the counter if it's available
+    } else {
+      console.error("Counter is undefined or not available.");
+      return 0; // Return 0 if counter is undefined
+    }
+  } catch (error) {
+    console.error("Error parsing response JSON:", error);
+    return 0; // Return 0 if parsing fails
+  }
+};
+
+export const getTotalScore = async () => {
+  const response = await fetch("http://localhost:3000/api/score/", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    console.error("Failed to fetch total score");
+    return 0;
+  }
+
+  const data = await response.json();
+  return data.total;
+};
+
+export const getLeaderboard = async () => {
+  const response = await fetch("http://localhost:3000/api/leaderboard/", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const data = await response.json();
+  return data;
+};

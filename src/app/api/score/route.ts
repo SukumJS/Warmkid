@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { ClickModel ,User} from "../../../../models/models";
 import { ConnectDB } from "../../../../config/config";
+import { connect } from "http2";
 
 export async function POST(req: Request) {
   try {
@@ -19,6 +20,16 @@ export async function POST(req: Request) {
     }
     await click.save();
     return NextResponse.json({ message: "Click" });
+  } catch (err) {
+    return NextResponse.json({ error: err }, { status: 500 });
+  }
+}
+
+export async function GET() {
+  try {
+    ConnectDB();
+    const totalcount = await ClickModel.countDocuments({});
+    return NextResponse.json({ total: totalcount }); // Return count as JSON response
   } catch (err) {
     return NextResponse.json({ error: err }, { status: 500 });
   }
