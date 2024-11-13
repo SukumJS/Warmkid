@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { ClickModel ,User} from "../../../../models/models";
 import { ConnectDB } from "../../../../config/config";
-import { connect } from "http2";
 
 export async function POST(req: Request) {
   try {

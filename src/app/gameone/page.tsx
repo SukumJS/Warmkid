@@ -6,8 +6,6 @@ import Image from "next/image";
 import Logo from "./../../../public/gameone8.svg";
 import PropQuizz from "../../../components/PropQuizz";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-
 interface QuizzContextType {
   currentQuizz: number[];
   quizzs: IQuizz[];
@@ -18,7 +16,6 @@ interface QuizzContextType {
   quizzperPage: number;
   answer: boolean[];
 }
-
 
 interface Ichoice {
   id: number;
@@ -31,8 +28,9 @@ interface IQuizz {
   question: string;
   choices: Ichoice[];
 }
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const QuizzContext = createContext<any>({});
+export const QuizzContext = createContext<QuizzContextType | undefined>(
+  undefined
+);
 
 const GameOne = () => {
   const { quizzs } = data;
@@ -54,7 +52,6 @@ const GameOne = () => {
     quizzperPage,
     answer,
   };
-
 
   return (
     <>
