@@ -9,11 +9,11 @@ export default function App() {
     const [goal , setGoal] = useState(false);
 
     useEffect(() => {
-                const getScore = setInterval(async () => {
-                    const totalScore = await getTotalScore();
-                    if(totalScore >= 1000)setGoal(true);
-                    setCount(totalScore);   
-                }, 50);
+        const getScore = setInterval(async () => {
+            const totalScore = await getTotalScore();
+                if(totalScore >= 1000)setGoal(true);
+                setCount(totalScore);   
+            }, 50);
         getScore;
       }, []);
     

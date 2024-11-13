@@ -36,7 +36,13 @@ export const handlePopClick = async () => {
 export const getScore = async () => {
   const cookieStore = await cookies();
   const userID = cookieStore.get("user_id")?.value;
-  
+
+  // Check if userID is available in the cookies
+  if (!userID) {
+    console.error("User ID not found in cookies.");
+    return 0;
+  }
+
   const response = await fetch(`http://localhost:3000/api/score/${userID}`, {
     method: "GET",
     headers: {
@@ -46,11 +52,23 @@ export const getScore = async () => {
 
   if (!response.ok) {
     console.error("Failed to fetch score");
-    return 0; // or handle error appropriately
+    return 0; // Return 0 if fetching the score fails
   }
 
-  const data = await response.json();
-  return data.user.counter; // Assuming the response has a score property
+  try {
+    const data = await response.json();
+
+    // Check if the response has the user object with the counter
+    if (data?.user?.counter !== undefined) {
+      return data.user.counter; // Return the counter if it's available
+    } else {
+      console.error("Counter is undefined or not available.");
+      return 0; // Return 0 if counter is undefined
+    }
+  } catch (error) {
+    console.error("Error parsing response JSON:", error);
+    return 0; // Return 0 if parsing fails
+  }
 };
 
 export const getTotalScore = async () => {
@@ -68,4 +86,16 @@ export const getTotalScore = async () => {
 
   const data = await response.json();
   return data.total; 
+};
+
+export const getLeaderboard = async () => {
+    const response = await fetch("http://localhost:3000/api/leaderboard/", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const data = await response.json();
+  return data;
 };
