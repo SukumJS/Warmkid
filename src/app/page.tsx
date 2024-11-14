@@ -20,7 +20,7 @@ export default function Home() {
   if(!cookie){
     return (
       <>
-        <div className="bg w-screen h-screen py-10 px-5 justify-items-center relative"> 
+        <div className="bg w-screen h-screen py-10 px-5 justify-items-center relative font-pixel"> 
           <Image src="/img/logoWarmkids.svg" alt="" width={500} height={500} className="mb-4"/>
           <form action={addUser} className="text-xl">
             <input type="name" name="name" placeholder="Enter name" className="mr-2 text-black px-1 rounded"/>

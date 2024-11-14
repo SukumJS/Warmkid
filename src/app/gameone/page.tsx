@@ -3,6 +3,7 @@
 import React, { useState , useEffect } from "react";
 import data from "@/data.json";
 import Image from "next/image";
+import Link from "next/link";
 import PropQuizz from "@/components/PropQuizz";
 import { checkCoookie } from '@/serverAction';
 import { redirect } from 'next/navigation'
@@ -33,8 +34,11 @@ const GameOne = () => {
       <Image src="/img/gameone8.svg" alt="Logo" width={300} height={300} className="flex justify-self-center mb-4"/>
           {score != -1 ? (
             <div>
+              <div className="flex-row">
               <h1 className="font-bold text-3xl text-white">You recived : {score} points!</h1>
-              <Image src="/img/modwelcome.png" alt="" width={500} height={500}></Image>
+              <Image src="/img/modwelcome.png" alt="modwelcome" width={500} height={500} className="justify-self-center"/>
+              <Link href="/"><Image src="/img/gobackbtn.svg" alt="" width={300} height={300} className="justify-self-center"/></Link>
+              </div>
             </div>
           ) : (
             <div>
