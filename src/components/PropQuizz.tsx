@@ -30,7 +30,7 @@ const PropQuizz = (props: QuizzContextType) => {
     paginate,
     currentPage,
     answer,
-    setScore,
+    setScore,    
   } = props;
 
   const quizz = currentQuizz;
@@ -72,7 +72,7 @@ const PropQuizz = (props: QuizzContextType) => {
       {quizz.map((quizz, index: number) => {
         return (
           <div key={index}>
-            <h1 className="mb-4 text-4xl">{quizz.question}</h1>
+            <h1 className="mb-4 text-4xl text-center">{quizz.question}</h1>
           <div>
               {quizz.choices.map((choice: Ichoice, index: number) => {
                 return (
@@ -81,8 +81,8 @@ const PropQuizz = (props: QuizzContextType) => {
                       <Image
                         src={choice.url}
                         alt="Logo"
-                        width={150}
-                        height={100}
+                        width={350}
+                        height={400}
                       />
                     </div>
                   </div>
