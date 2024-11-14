@@ -44,7 +44,7 @@ const GameOne = () => {
             <div>
               <div className="my-auto py-5 text-2xl">
                 <h1>WHICH IS A</h1>
-                <h1>&quot; AI GENERATED IMAGE&quot;</h1>
+                <h1>&quot; AI GENERATED IMAGE &quot;</h1>
               </div>
               <PropQuizz
                 currentQuizz={currentQuizz}
