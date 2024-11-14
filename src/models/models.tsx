@@ -42,3 +42,17 @@ const Click = new Schema({
 
 export const ClickModel =
   mongoose.models.Click || mongoose.model("Click", Click);
+
+const Games = new Schema({
+  game: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  status: {
+    type: Boolean,
+    required: true,
+  },
+});
+
+export const GameModel = mongoose.models.Game || mongoose.model("Game", Games);
