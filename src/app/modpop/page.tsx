@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { handlePopClick, getScore , checkCoookie } from '@/serverAction';
+import { handlePopClick, getScore , checkCoookie } from '@/serverAction/serverAction';
 import Image from "next/image";
 import { redirect } from 'next/navigation'
 

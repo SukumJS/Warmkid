@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { addUser, checkCoookie } from "@/serverAction";
+import { addUser, checkCoookie } from "@/serverAction/serverAction";
 import Image from "next/image";
 import Link from "next/link";
 
