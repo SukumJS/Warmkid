@@ -59,7 +59,7 @@ export const handleAnswerSubmit = async (resultArray: boolean[]) => {
     console.log("letgo : " + resultArray);
 
     const userID = cookieStore.get("user_id")?.value;
-    const response = await fetch(`http://localhost:3000/api/quizz`, {
+    const response = await fetch(baseURL+`/api/quizz`, {
       method: "POST",
       body: JSON.stringify({ id: userID, answer: resultArray }),
       headers: {
