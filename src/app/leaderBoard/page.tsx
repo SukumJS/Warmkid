@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getLeaderboard } from "@/serverAction";
+import { getLeaderboard } from "@/serverAction/serverAction";
 
 export default function App() {
   const [leaderboard, setLeaderboard] = useState<

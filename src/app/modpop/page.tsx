@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { handlePopClick, getScore } from '@/serverAction';
+import { handlePopClick, getScore } from '@/serverAction/serverAction';
 import Image from "next/image";
 
 export default function App() {

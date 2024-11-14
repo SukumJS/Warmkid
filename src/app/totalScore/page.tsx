@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getTotalScore } from "@/serverAction";
+import { getTotalScore } from "@/serverAction/serverAction";
 import Image from "next/image";
 
 export default function App() {

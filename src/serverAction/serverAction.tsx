@@ -1,19 +1,16 @@
 "use server";
 import { cookies } from "next/headers";
-// import { baseURL } from "@/config/config";
+import { baseURL } from "@/config/config";
 
 export const addUser = async (formData: FormData) => {
   const cookieStore = await cookies();
-  const response = await fetch(
-    "https://warmkid-nextjs.ialwh0.easypanel.host/api/user",
-    {
-      method: "POST",
-      body: JSON.stringify({ name: formData.get("name") }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const response = await fetch(baseURL + "/api/user", {
+    method: "POST",
+    body: JSON.stringify({ name: formData.get("name") }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   const data = await response.json();
   cookieStore.set({
     name: "user_id",
@@ -28,7 +25,7 @@ export const handlePopClick = async () => {
   try {
     const cookieStore = await cookies();
     const userID = cookieStore.get("user_id")?.value;
-    await fetch(`https://warmkid-nextjs.ialwh0.easypanel.host/api/score`, {
+    await fetch(baseURL + `/api/score`, {
       method: "POST",
       body: JSON.stringify({ userID: userID }),
       headers: {
@@ -52,7 +49,7 @@ export const handleAnswerSubmit = async (resultArray: boolean[]) => {
     console.log("letgo : " + resultArray);
 
     const userID = cookieStore.get("user_id")?.value;
-    await fetch(`https://warmkid-nextjs.ialwh0.easypanel.host/api/quizz`, {
+    await fetch(baseURL + `/api/quizz`, {
       method: "POST",
       body: JSON.stringify({ id: userID, answer: resultArray }),
       headers: {
@@ -80,15 +77,12 @@ export const getScore = async () => {
     return 0;
   }
 
-  const response = await fetch(
-    `https://warmkid-nextjs.ialwh0.easypanel.host/api/score/${userID}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const response = await fetch(baseURL + `/api/score/${userID}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   if (!response.ok) {
     console.error("Failed to fetch score");
@@ -112,15 +106,12 @@ export const getScore = async () => {
 };
 
 export const getTotalScore = async () => {
-  const response = await fetch(
-    "https://warmkid-nextjs.ialwh0.easypanel.host/api/score/",
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const response = await fetch(baseURL + "/api/score/", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   if (!response.ok) {
     console.error("Failed to fetch total score");
@@ -132,15 +123,12 @@ export const getTotalScore = async () => {
 };
 
 export const getLeaderboard = async () => {
-  const response = await fetch(
-    "https://warmkid-nextjs.ialwh0.easypanel.host/api/leaderboard/",
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const response = await fetch(baseURL + "/api/leaderboard/", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   const data = await response.json();
   return data;

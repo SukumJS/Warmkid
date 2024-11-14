@@ -1,6 +1,6 @@
 import React, {useEffect } from "react";
 import Image from "next/image";
-import { handleAnswerSubmit } from "@/serverAction";
+import { handleAnswerSubmit } from "@/serverAction/serverAction";
 import data from "../data.json";
 
 interface Ichoice {

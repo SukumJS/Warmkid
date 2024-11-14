@@ -1,5 +1,5 @@
 "use client";
-import { addUser, handlePopClick } from "@/serverAction";
+import { addUser, handlePopClick } from "@/serverAction/serverAction";
 
 export default function Home() {
   return (
