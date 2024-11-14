@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getLeaderboard } from "@/serverAction";
+import { getLeaderboard } from "@/serverAction/serverAction";
 import Image from "next/image";
 
 export default function App() {
