@@ -8,13 +8,25 @@ import Link from "next/link";
 export default function Home() {
   const [cookie, setCookie] = useState(false);
 
+  const [gameone, setGameone] = useState<boolean>(false);
+  const [modpop, setModpop] = useState<boolean>(false);
+
+  const getStatus = async () => {
+    await fetch("/api/settinggame").then(async (res) => {
+      const data = await res.json();
+      setGameone(data.gamesone);
+      setModpop(data.modpop);
+    });
+  };
+
   useEffect(() => {
     async function getCookie() {
       const isCookie = await checkCoookie();
       if (isCookie) setCookie(true);
     }
     getCookie();
-  }, []);
+    getStatus();
+  });
 
   if (!cookie) {
     return (
@@ -62,7 +74,7 @@ export default function Home() {
             height={500}
             className="mb-4"
           />
-          <Link href={"/gameone"}>
+          <Link href={"/gameone"} className={gameone ? '' : 'hidden'}>
             <Image
               src="/img/gameone8.svg"
               alt="logoG1"
@@ -71,7 +83,7 @@ export default function Home() {
               className="mb-6"
             />
           </Link>
-          <Link href={"/modpop"}>
+          <Link href={"/modpop"} className={modpop ? '' : 'hidden'}>
             <Image
               src="/img/logoGame2.svg"
               alt="logoG2"
