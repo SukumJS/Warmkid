@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
-import { ConnectDB } from "../../../../../config/config";
-import {User } from "../../../../../models/models";
+import { ConnectDB } from "../../../../config/config";
+import { User } from "../../../../../models/models";
 
-export async function GET(
-  req: Request,
-  { params }: { params: { user_id: string } }
-) {
+type RouteContext = {
+  params: Promise<{ user_id: string }>;
+};
+
+export async function GET(req: Request, context: RouteContext) {
   try {
-    const { user_id } = await params;
+    const { user_id } = await context.params;
+
     await ConnectDB();
     const user = await User.findById(user_id);
 
@@ -15,14 +17,17 @@ export async function GET(
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    return NextResponse.json({ 
+    return NextResponse.json({
       user: {
-        user_id : user._id,
-        counter: user.ClickArry.length
-      }
+        user_id: user._id,
+        counter: user.ClickArry.length, // Assuming ClickArry is the field for the user's score
+      },
     });
   } catch (err) {
     console.error(err);
-    return NextResponse.error();
+    return NextResponse.json(
+      { error: "Failed to fetch user score" },
+      { status: 500 }
+    );
   }
 }

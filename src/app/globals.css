@@ -19,3 +19,10 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.bg {
+  background: 
+    url('../../public/img/Star.svg'),
+    radial-gradient(circle, rgb(76, 29, 149) 0%, rgb(112, 0, 172) 100%);
+    
+}
