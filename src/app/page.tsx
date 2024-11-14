@@ -32,8 +32,8 @@ export default function Home() {
             className="py-40 text-xl flex flex-col items-center justify-center "
           >
             <input
-              type="name"
-              name="name"
+              type="text"
+              name="phone"
               placeholder="Enter name"
               className="mb-4 text-black px-2 py-1 rounded"
             />

@@ -5,7 +5,7 @@ import data from "@/data.json";
 import Image from "next/image";
 import Link from "next/link";
 import PropQuizz from "@/components/PropQuizz";
-import { checkCoookie } from '@/serverAction';
+import { checkCoookie } from '@/serverAction/serverAction';
 import { redirect } from 'next/navigation'
 
 const GameOne = () => {
@@ -27,6 +27,9 @@ const GameOne = () => {
     getCookie();
   }, []);
 
+  console.log(score);
+  
+
   return (
     <>
       <div className="bg w-screen min-h-screen h-auto py-10 px-5">
@@ -42,10 +45,10 @@ const GameOne = () => {
             </div>
           ) : (
             <div>
-              <div className="my-auto py-5 text-2xl">
+              {/* <div className="my-auto py-5 text-2xl">
                 <h1>WHICH IS A</h1>
                 <h1>&quot; AI GENERATED IMAGE &quot;</h1>
-              </div>
+              </div> */}
               <PropQuizz
                 currentQuizz={currentQuizz}
                 quizzs={quizzs}

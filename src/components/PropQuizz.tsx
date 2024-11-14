@@ -1,4 +1,4 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { handleAnswerSubmit } from "@/serverAction/serverAction";
 import data from "../data.json";
@@ -66,28 +66,29 @@ const PropQuizz = (props: QuizzContextType) => {
     handleNextQuizz();
   };
 
-
   return (
     <div className="h-full w-full flex justify-center">
       {quizz.map((quizz, index: number) => {
         return (
           <div key={index}>
-            <h1 className="mb-4 text-4xl">{quizz.question}</h1>
-          <div>
-              {quizz.choices.map((choice: Ichoice, index: number) => {
-                return (
-                  <div className="flex flex-row mb-4" key={index}>
-                    <div onClick={() => handleAnswer(choice.isCorrect)}>
-                      <Image
-                        src={choice.url}
-                        alt="Logo"
-                        width={150}
-                        height={100}
-                      />
+            <h1 className="mb-4 text-4xl text-center">{quizz.question}</h1>
+            <div className="flex justify-center">
+              <div>
+                {quizz.choices.map((choice: Ichoice, index: number) => {
+                  return (
+                    <div className="flex flex-row mb-4" key={index}>
+                      <div onClick={() => handleAnswer(choice.isCorrect)}>
+                        <Image
+                          src={choice.url}
+                          alt="Logo"
+                          width={150}
+                          height={100}
+                        />
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
           </div>
         );

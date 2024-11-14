@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { ConnectDB } from "../../../../config/config";
-import { User } from "../../../../../models/models";
+import { User } from "../../../../models/models";
 
 type RouteContext = {
   params: Promise<{ user_id: string }>;

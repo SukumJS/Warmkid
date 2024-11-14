@@ -13,22 +13,40 @@ export const checkCoookie = async () => {
 
 export const addUser = async (formData: FormData) => {
   const cookieStore = await cookies();
+  const phone = formData.get("phone");
+
+  if (!phone) {
+    console.error("Phone number is required.");
+    return;
+  }
+
+  if (phone.toString().length < 10) {
+    console.error("Phone number is too short.");
+    return;
+  }
+
   const response = await fetch(baseURL + "/api/user", {
     method: "POST",
-    body: JSON.stringify({ name: formData.get("name") }),
+    body: JSON.stringify({ phone }),
     headers: {
       "Content-Type": "application/json",
     },
   });
+
+  if (!response.ok) {
+    console.error("User not found");
+    return;
+  }
+
   const data = await response.json();
-  cookieStore.set({
+  await cookieStore.set({
     name: "user_id",
     value: data._id,
     httpOnly: true,
     path: "/",
   });
   console.log(data);
-  redirect('/')
+  redirect("/");
 };
 
 export const handlePopClick = async () => {
@@ -59,11 +77,11 @@ export const handleAnswerSubmit = async (resultArray: boolean[]) => {
     console.log("letgo : " + resultArray);
 
     const userID = cookieStore.get("user_id")?.value;
-    const response = await fetch(baseURL+`/api/quizz`, {
+    const response = await fetch(baseURL + `/api/quizz`, {
       method: "POST",
       body: JSON.stringify({ id: userID, answer: resultArray }),
       headers: {
-      "Content-Type": "application/json",
+        "Content-Type": "application/json",
       },
     });
 
@@ -73,6 +91,8 @@ export const handleAnswerSubmit = async (resultArray: boolean[]) => {
     }
 
     const data = await response.json();
+    console.log(data);
+
     return data;
   } catch (error) {
     console.log(error);

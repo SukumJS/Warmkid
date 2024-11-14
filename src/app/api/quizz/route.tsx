@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { User } from "../../../../models/models";
+import { User } from "../../../models/models";
 import { ConnectDB } from "../../../config/config";
 
 export async function GET() {
@@ -10,7 +10,7 @@ export async function POST(req: Request) {
   try {
     await ConnectDB();
     const { answer, id } = await req.json();
-    const score = [10, 20];
+    const score = [10, 20,10 ,30 ,10,50 ,10, 20, 10, 30];
     const newAnswer = answer.map((ans: boolean, index: number) => {
       if (ans) {
         return score[index];
