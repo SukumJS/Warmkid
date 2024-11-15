@@ -14,6 +14,7 @@ export default function App() {
   const [count, addCount] = useState<number>(0);
   const [isClicked, setClick] = useState(false);
   const countRef = useRef<number>(0);
+  const [isLoading, setLoading] = useState(true);
 
   function AddCounter() {
     setClick(true);
@@ -29,7 +30,9 @@ export default function App() {
 
   useEffect(() => {
     async function fetchScore() {
-      const initialScore = await getScore();
+      setLoading(true);
+      const initialScore = parseInt(await getScore());
+      setLoading(false);
       addCount(initialScore);
       countRef.current = initialScore;
     }
@@ -66,20 +69,22 @@ export default function App() {
       </div>
 
       <div className="flex flex-grow items-center justify-center text-center text-white">
-        <div>
-          <div className="font-bold text-6xl mb-6">POPMOD</div>
-          <div className="flex justify-center items-center mb-6">
-            <button onClick={AddCounter}>
-              <Image
-                src={isClicked ? "/img/mod2.png" : "/img/mod1.png"}
-                alt="mod"
-                width={500}
-                height={500}
-              />
-            </button>
+        {!isLoading && (
+          <div>
+            <div className="font-bold text-6xl mb-6">POPMOD</div>
+            <div className="flex justify-center items-center mb-6">
+              <button onClick={AddCounter}>
+                <Image
+                  src={isClicked ? "/img/mod2.png" : "/img/mod1.png"}
+                  alt="mod"
+                  width={500}
+                  height={500}
+                />
+              </button>
+            </div>
+            <div className="font-bold text-6xl">{count} Point!</div>
           </div>
-          <div className="font-bold text-6xl">{count} Point!</div>
-        </div>
+        )}
       </div>
     </div>
   );
