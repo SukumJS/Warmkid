@@ -24,6 +24,10 @@ const userSchema = new Schema({
   Game: {
     type: [Number],
   },
+  Clicks: {
+    type: String,
+    default: 0,
+  },
 });
 
 export const User = mongoose.models.User || mongoose.model("User", userSchema);
