@@ -30,7 +30,7 @@ const GameOne = () => {
     const fetchSettings = async () => {
       const data = await getGameSettings();
       console.log(data);
-      if (!data.gameone) {
+      if (!data.gamesone) {
         console.log("gameone is disabled");
         redirect("/");
       }
