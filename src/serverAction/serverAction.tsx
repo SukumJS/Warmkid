@@ -165,3 +165,14 @@ export const getLeaderboard = async () => {
   const data = await response.json();
   return data;
 };
+
+export const getGameSettings = async () => {
+  const response = await fetch(baseURL + "/api/settinggame", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await response.json();
+  return data;
+};

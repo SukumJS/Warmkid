@@ -6,6 +6,7 @@ import {
   handlePopClick,
   getScore,
   checkCoookie,
+  getGameSettings,
 } from "@/serverAction/serverAction";
 import Image from "next/image";
 import { redirect } from "next/navigation";
@@ -45,6 +46,17 @@ export default function App() {
       if (!isCookie) redirect("/");
     }
     getCookie();
+  }, []);
+  useEffect(() => {
+    const fetchSettings = async () => {
+      const data = await getGameSettings();
+      console.log(data);
+      if (!data.modpop) {
+        console.log("modpop is disabled");
+        redirect("/");
+      }
+    };
+    fetchSettings();
   }, []);
   useEffect(() => {
     const interval = setInterval(() => {

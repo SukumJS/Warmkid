@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import data from "@/data.json";
 import Image from "next/image";
 import Link from "next/link";
 import PropQuizz from "@/components/PropQuizz";
-import { checkCoookie } from '@/serverAction/serverAction';
-import { redirect } from 'next/navigation'
+import { checkCoookie, getGameSettings } from "@/serverAction/serverAction";
+import { redirect } from "next/navigation";
 
 const GameOne = () => {
   const { quizzs } = data;
@@ -21,26 +21,58 @@ const GameOne = () => {
 
   useEffect(() => {
     async function getCookie() {
-        const isCookie = await checkCoookie();
-        if(!isCookie)redirect('/')
+      const isCookie = await checkCoookie();
+      if (!isCookie) redirect("/");
     }
     getCookie();
   }, []);
+  useEffect(() => {
+    const fetchSettings = async () => {
+      const data = await getGameSettings();
+      console.log(data);
+      if (!data.gameone) {
+        console.log("gameone is disabled");
+        redirect("/");
+      }
+    };
+    fetchSettings();
+  }, []);
 
   console.log(score);
-  
 
   return (
     <>
       <div className="bg w-screen min-h-screen h-auto py-10 px-5">
-      <div className="text-center font-bold text-white">
-      <Image src="/img/gameone8.svg" alt="Logo" width={300} height={300} className="flex justify-self-center mb-4"/>
+        <div className="text-center font-bold text-white">
+          <Image
+            src="/img/gameone8.svg"
+            alt="Logo"
+            width={300}
+            height={300}
+            className="flex justify-self-center mb-4"
+          />
           {score != -1 ? (
             <div>
               <div className="flex-row">
-              <h1 className="font-bold text-3xl text-white">You recived : {score} points!</h1>
-              <Image src="/img/modwelcome.png" alt="modwelcome" width={500} height={500} className="justify-self-center"/>
-              <Link href="/"><Image src="/img/gobackbtn.svg" alt="" width={300} height={300} className="justify-self-center"/></Link>
+                <h1 className="font-bold text-3xl text-white">
+                  You recived : {score} points!
+                </h1>
+                <Image
+                  src="/img/modwelcome.png"
+                  alt="modwelcome"
+                  width={500}
+                  height={500}
+                  className="justify-self-center"
+                />
+                <Link href="/">
+                  <Image
+                    src="/img/gobackbtn.svg"
+                    alt=""
+                    width={300}
+                    height={300}
+                    className="justify-self-center"
+                  />
+                </Link>
               </div>
             </div>
           ) : (

@@ -44,9 +44,10 @@ export default function Home() {
             className="py-40 text-xl flex flex-col items-center justify-center "
           >
             <input
-              type="text"
+              type="tel"
               name="phone"
-              placeholder="Enter name"
+              placeholder="Enter your phone number"
+              pattern="[0-9]*"
               className="mb-4 text-black px-2 py-1 rounded"
             />
             <button className="bg-green-400 text-white px-4 py-2 rounded">
@@ -74,7 +75,7 @@ export default function Home() {
             height={500}
             className="mb-4"
           />
-          <Link href={"/gameone"} className={gameone ? '' : 'hidden'}>
+          <Link href={"/gameone"} className={gameone ? "" : "hidden"}>
             <Image
               src="/img/gameone8.svg"
               alt="logoG1"
@@ -83,7 +84,7 @@ export default function Home() {
               className="mb-6"
             />
           </Link>
-          <Link href={"/modpop"} className={modpop ? '' : 'hidden'}>
+          <Link href={"/modpop"} className={modpop ? "" : "hidden"}>
             <Image
               src="/img/logoGame2.svg"
               alt="logoG2"
