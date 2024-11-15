@@ -10,7 +10,7 @@ export async function GET() {
   await ConnectDB();
   const users = (await User.find({})).map((user) => ({
     user: `${user.nickname} ${user.name.split(" ")[0]} `,
-    score: sum(user.Game) + user.ClickArry.length,
+    score: sum(user.Game) + parseInt(user.Clicks),
   }));
   users.sort((a, b) => b.score - a.score);
   return NextResponse.json(users);

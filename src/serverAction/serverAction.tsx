@@ -49,13 +49,13 @@ export const addUser = async (formData: FormData) => {
   redirect("/");
 };
 
-export const handlePopClick = async () => {
+export const handlePopClick = async (click: number) => {
   try {
     const cookieStore = await cookies();
     const userID = cookieStore.get("user_id")?.value;
-    await fetch(baseURL + `/api/score`, {
+    await fetch(baseURL + `/api/fetchClick`, {
       method: "POST",
-      body: JSON.stringify({ userID: userID }),
+      body: JSON.stringify({ userID: userID, click: click }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -126,7 +126,7 @@ export const getScore = async () => {
 
     // Check if the response has the user object with the counter
     if (data?.user?.counter !== undefined) {
-      return data.user.counter; // Return the counter if it's available
+      return data.user.Clicks; // Return the counter if it's available
     } else {
       console.error("Counter is undefined or not available.");
       return 0; // Return 0 if counter is undefined
@@ -162,6 +162,17 @@ export const getLeaderboard = async () => {
     },
   });
 
+  const data = await response.json();
+  return data;
+};
+
+export const getGameSettings = async () => {
+  const response = await fetch(baseURL + "/api/settinggame", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   const data = await response.json();
   return data;
 };

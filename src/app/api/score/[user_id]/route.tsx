@@ -21,6 +21,7 @@ export async function GET(req: Request, context: RouteContext) {
       user: {
         user_id: user._id,
         counter: user.ClickArry.length, // Assuming ClickArry is the field for the user's score
+        Clicks: user.Clicks,
       },
     });
   } catch (err) {
