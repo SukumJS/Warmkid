@@ -45,6 +45,7 @@ export default function App() {
   }, []);
   useEffect(() => {
     const interval = setInterval(() => {
+      console.log(countRef.current);
       handlePopClick(countRef.current);
     }, 2000);
 
