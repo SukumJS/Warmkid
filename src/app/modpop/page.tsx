@@ -11,14 +11,14 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 
 export default function App() {
-  const [count, addCount] = useState(0);
+  const [count, addCount] = useState<number>(0);
   const [isClicked, setClick] = useState(false);
-  const countRef = useRef(0);
+  const countRef = useRef<number>(0);
 
   function AddCounter() {
     setClick(true);
     addCount((prevCount) => {
-      const newCount = prevCount + 1;
+      const newCount = prevCount + 1 - 0;
       countRef.current = newCount;
       return newCount;
     });
@@ -45,8 +45,8 @@ export default function App() {
   }, []);
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log(countRef.current);
       handlePopClick(countRef.current);
+      console.log(countRef.current);
     }, 2000);
 
     // Clear the interval when the component unmounts
