@@ -71,7 +71,19 @@ const PropQuizz = (props: QuizzContextType) => {
       {quizz.map((quizz, index: number) => {
         return (
           <div key={index}>
-            <h1 className="mb-4 text-4xl text-center">{quizz.question}</h1>
+            <h1 className="mb-4 text-4xl text-center">
+              {quizz.question <= 5 ? (
+                <>
+                  รูปภาพไหนที่<span className="text-red-600">ไม่ได้</span>
+                  มาจากการใช้ AI Generate
+                </>
+              ) : (
+                <>
+                  รูปภาพไหนที่<span className="text-green-500">ได้</span>
+                  มาจากการใช้ AI Generate
+                </>
+              )}
+            </h1>
             <div className="flex justify-center">
               <div>
                 {quizz.choices.map((choice: Ichoice, index: number) => {
