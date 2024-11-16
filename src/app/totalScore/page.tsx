@@ -11,7 +11,7 @@ export default function App() {
   useEffect(() => {
     const getScore = setInterval(async () => {
       const totalScore = await getTotalScore();
-      if (totalScore >= 1000) setGoal(true);
+      if (totalScore >= 50000) setGoal(true);
       setCount(totalScore);
     }, 50);
     return () => clearInterval(getScore);
