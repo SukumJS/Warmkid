@@ -28,6 +28,10 @@ const userSchema = new Schema({
     type: String,
     default: 0,
   },
+  NoMacroClick: {
+    type: String,
+    default: 0,
+  },
 });
 
 export const User = mongoose.models.User || mongoose.model("User", userSchema);
