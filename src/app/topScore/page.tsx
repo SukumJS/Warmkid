@@ -25,26 +25,18 @@ export default function App() {
   }, []);
 
   return (
-    <div className="bg min-h-screen h-auto flex items-center justify-center py-10 px-5 flex-col">
-      <table className="w-full max-w-xs bg-white rounded-lg shadow-md text-black p-4">
-        <thead>
-          <tr className="bg-blue-500 text-white font-semibold rounded-t-lg">
-            <th className="p-3 text-left">Name</th>
-            <th className="p-3 text-left">Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          {leaderboard.map((entry, index) => (
-            <tr
-              key={index}
-              className="odd:bg-gray-100 even:bg-gray-50 hover:bg-blue-100"
-            >
-              <td className="p-3">{entry.user}</td>
+    <div className=" min-h-screen h-auto flex items-center justify-center py-10 px-5 flex-col bg-green-500">
+      <tbody>
+        {leaderboard.map((entry, index) => {
+          if (index > 2) return;
+          return (
+            <tr key={index} className="text-9xl text-white font-bold">
+              <td className="p-3 col-span-3">{entry.user}</td>
               <td className="p-3">{entry.score}</td>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          );
+        })}
+      </tbody>
     </div>
   );
 }
