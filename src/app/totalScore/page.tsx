@@ -1,17 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getTotalScore } from "@/serverAction/serverAction";
-import Image from "next/image";
+import { getModPopTotalScore } from "@/serverAction/serverAction";
 
 export default function App() {
   const [count, setCount] = useState(0);
-  const [goal, setGoal] = useState(false);
 
   useEffect(() => {
     const getScore = setInterval(async () => {
-      const totalScore = await getTotalScore();
-      if (totalScore >= 50000) setGoal(true);
+      const totalScore = await getModPopTotalScore();
       setCount(totalScore);
     }, 50);
     return () => clearInterval(getScore);
@@ -19,18 +16,11 @@ export default function App() {
 
   return (
     <>
-      <div className="bg w-screen h-screen content-center">
+      <div className="bg-green-500 w-screen h-screen content-center">
         <div>
-          <div className="font-bold text-5xl flex justify-self-center text-white mb-4">
-            Total Score : {count}
+          <div className="font-bold text-9xl flex justify-self-center text-white mb-4">
+            {count}
           </div>
-          <Image
-            src={goal ? "/img/modwelcome.png" : "/img/modplussign.png"}
-            className="flex justify-self-center"
-            alt=""
-            width={500}
-            height={500}
-          ></Image>
         </div>
       </div>
     </>
