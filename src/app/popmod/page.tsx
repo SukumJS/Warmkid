@@ -54,7 +54,6 @@ export default function App() {
   useEffect(() => {
     const fetchSettings = async () => {
       const data = await getGameSettings();
-      console.log(data);
       if (!data.modpop) {
         console.log("modpop is disabled");
         redirect("/");
@@ -70,7 +69,6 @@ export default function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       handleModPopClick(countRef.current);
-      console.log(countRef.current);
     }, 2000);
 
     return () => clearInterval(interval);
