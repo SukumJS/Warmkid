@@ -84,7 +84,7 @@ export default function Home() {
               className="mb-6"
             />
           </Link>
-          <Link href={"/modpop"} className={modpop ? "" : "hidden"}>
+          <Link href={"/popmod"} className={modpop ? "" : "hidden"}>
             <Image
               src="/img/logoGame2.svg"
               alt="logoG2"
